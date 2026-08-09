@@ -8,3 +8,8 @@
 .bangla-font {
   font-family: "Hind Siliguri", sans-serif;
 }
+
+.active {
+  background-color: rgb(83, 83, 226);
+  color: aliceblue;
+}
