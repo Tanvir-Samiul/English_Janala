@@ -21,6 +21,11 @@ function pronounceWord(word) {
   window.speechSynthesis.speak(utterance);
 }
 
+const inactive = () => {
+  const inactiveBtn = document.querySelectorAll(".inactive");
+  inactiveBtn.forEach((inact) => inact.classList.remove("active"));
+};
+
 // loadLesson is a function to load the api of all levels and it sends the data to displayLevel funciton
 
 const loadLesson = () => {
@@ -53,26 +58,30 @@ const wordLoad = (id) => {
     .then((res) => res.json())
     .then((allWords) => {
       const clickedBtn = document.getElementById(`wordLoad(${id})`);
-      const inactive = () => {
-        const inactiveBtn = document.querySelectorAll(".inactive");
-        inactiveBtn.forEach((inact) => inact.classList.remove("active"));
-        clickedBtn.classList.add("active");
-      };
+
       inactive();
+      clickedBtn.classList.add("active");
 
       allWord(allWords.data);
     });
 };
 
 // allWord is the function which display all the word or cards when any level is being clicked. it receive an array of all words.
-const allWord = (words) => {
+const allWord = (words, isSearch = false) => {
   const wordContainer = document.getElementById("words-container");
   wordContainer.innerHTML = "";
   const wordText = document.getElementById("word-text");
   wordText.innerHTML = "";
   if (words.length == 0) {
-    wordText.innerHTML = `
-    
+    wordText.innerHTML = isSearch
+      ? `<img class="my-0 mx-auto" src="./assets/alert-error.png" alt=""/>
+               <p class="bangla-font mt-5 mb-1">কোন শব্দ পাওয়া যায়নি!</p>
+               <p class="bangla-font text-4xl font-extrabold mb-4">অন্য কোন শব্দ খুঁজুন</p>
+
+
+
+    `
+      : `
      <img class ="my-o mx-auto" src ="./assets/alert-error.png" alr="" />
     <div id="word-text">
         <p class="bangla-font mt-5 mb-1">Sorry!! There's no lesson yet</p>
@@ -147,8 +156,7 @@ const displayWordDetails = (details) => {
 };
 
 document.getElementById("btn-search").addEventListener("click", async () => {
-  const inactiveBtn = document.querySelectorAll(".inactive");
-  inactiveBtn.forEach((inact) => inact.classList.remove("active"));
+  inactive();
 
   const input = document.getElementById("input-search").value.toLowerCase();
 
@@ -159,7 +167,7 @@ document.getElementById("btn-search").addEventListener("click", async () => {
   const filterWord = allWords.filter((word) =>
     word.word.toLowerCase().includes(input),
   );
-  allWord(filterWord);
+  allWord(filterWord, true);
   document.getElementById("input-search").value = "";
 });
 
