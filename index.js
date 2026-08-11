@@ -15,6 +15,12 @@ const loadSpiner = (status) => {
   }
 };
 
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
 // loadLesson is a function to load the api of all levels and it sends the data to displayLevel funciton
 
 const loadLesson = () => {
@@ -93,7 +99,7 @@ const allWord = (words) => {
             class="flex justify-center items-center w-14 h-14 bg-blue-100 rounded-lg"
             ><i class="fa-solid fa-circle-info"></i
           ></span>
-          <span
+          <span onclick=pronounceWord('${word.word}')
             class="flex justify-center items-center w-14 h-14 bg-blue-100 rounded-lg"
             ><i class="fa-solid fa-volume"></i
           ></span>
