@@ -139,6 +139,26 @@
       ></div>
     </div>
 
+    <section id="spiner" class="flex justify-center items-center hidden">
+      <span class="loading loading-spinner text-error"></span>
+    </section>
+
+    <div class="join flex justify-center items-center mb-2">
+      <div>
+        <label class="input validator join-item">
+          <input
+            id="input-search"
+            type="text"
+            placeholder="Search Vocab"
+            required
+          />
+        </label>
+      </div>
+      <button id="btn-search" class="btn btn-primary inactive join-item">
+        Search
+      </button>
+    </div>
+
     <div
       id="whole-word-container"
       class="w-11/12 mx-auto mb-5 text-center bg-[#F8F8F8] rounded-2xl p-5"
@@ -158,7 +178,7 @@
     <!-- Open the modal using ID.showModal() method -->
     <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
     <dialog id="my_modal" class="modal modal-bottom sm:modal-middle">
-      <div class="modal-box">
+      <div class="modal-box shadow-xl">
         <div id="modal-text"></div>
         <div class="modal-action">
           <form method="dialog">
